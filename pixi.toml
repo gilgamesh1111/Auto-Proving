@@ -1,0 +1,31 @@
+[workspace]
+authors = ["Gilgamesh <18860289355@163.com>"]
+channels = ["conda-forge"]
+name = "LEL"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "==3.11.13"
+ipython = ">=9.4.0,<10"
+notebook = ">=7.4.4,<8"
+langgraph = ">=0.5.2,<0.6"
+pixi-pycharm = ">=0.0.8,<0.0.9"
+gxx = ">=15.1.0,<15.2"
+cmake = ">=4.0.3,<5"
+make = ">=4.4.1,<5"
+binutils = ">=2.44,<3"
+langchain-community = ">=0.3.27,<0.4"
+
+[pypi-dependencies]
+langchain-google-genai = ">=2.1.7, <3"
+dotenv = ">=0.9.9, <0.10"
+langchain-chroma = ">=0.2.4, <0.3"
+dashscope = ">=1.23.8, <2"
+unstructured = ">=0.18.7, <0.19"
+markdown = ">=3.8.2, <4"
+lean-interact = ">=0.7.0, <0.8"
+lean-explore = ">=0.3.0, <0.4"
+ddgs = ">=9.2.3, <10"
