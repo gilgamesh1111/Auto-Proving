@@ -9,8 +9,6 @@ load_dotenv()
 LEANEXPLORE_API_KEY = os.getenv("LEANEXPLORE_API_KEY")
 if LEANEXPLORE_API_KEY is None:
     LEANEXPLORE_API_KEY=input("Please enter your Lean Explore API key: ")
-
-client = Client(api_key=LEANEXPLORE_API_KEY)
 print("API Client initialized.")
 
 from typing import TypedDict
@@ -41,7 +39,7 @@ async def search_lean_theorem(query_str: str) -> list[SearchResponse]:
         - source_file (str): The source file where the theorem is defined.
         - range_start_line (int): The starting line number of the theorem's definition.
     """
-    global client
+    client=Client(api_key=LEANEXPLORE_API_KEY)
     search_response_api =await client.search(query=query_str)
     res_ls=[]
     for item in search_response_api.results[:6]:
@@ -68,5 +66,5 @@ def ddgs_search(query_str:str) -> str:
     return search.invoke(query_str)
 
 if __name__ == "__main__":
-       res=ddgs_search.invoke("Obama's first name?",)
-       print(len(res))
+    res=asyncio.run(search_lean_theorem("2 is not in \mathbb{Q}"))
+    print(res)

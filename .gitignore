@@ -2,3 +2,7 @@
 .pixi
 .idea
 .vscode
+.env
+mathlib4
+try
+src/src_VectorStore
