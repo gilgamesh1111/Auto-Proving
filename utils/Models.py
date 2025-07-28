@@ -8,8 +8,6 @@ from langchain_ollama import ChatOllama
 load_dotenv()
 
 
-import asyncio
-
 class Prover:
     def __init__(self,model_ls: Annotated[list[str], "modelNames"],plantform: str = "huggingface"):
         self.model_ls=model_ls
@@ -40,21 +38,18 @@ class Prover:
         """
         使用多线程同时调用所有模型。
         """
+        print("run prover")
         results_queue = Queue()
-
         def worker(key, model):
             result = model.invoke(*args, **kwargs)
             results_queue.put((key, result))
-
         threads = []
         for key, model in self.models_dict.items():
             thread = thd.Thread(target=worker, args=(key, model))
             threads.append(thread)
             thread.start()
-
         for thread in threads:
             thread.join()
-
         final_results = {}
         while not results_queue.empty():
             key, result = results_queue.get()
@@ -63,7 +58,7 @@ class Prover:
         return final_results
     
 if __name__ == "__main__":
-    model_ls = ["hf.co/DevQuasar/AI-MO.Kimina-Prover-Preview-Distill-7B-GGUF:Q4_K_M"]
+    model_ls = ["hf.co/DevQuasar/AI-MO.Kimina-Prover-Preview-Distill-7B-GGUF:Q4_K_M" for i in range(2)]
     prover = Prover(model_ls,"local")
     responses = prover.ainvoke(r"use lean to prove 2 is not in \mathbb{Q}")
     print(responses)
