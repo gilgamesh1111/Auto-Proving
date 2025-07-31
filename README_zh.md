@@ -29,7 +29,7 @@
 #### 1. 克隆代码仓库
 
 ```bash
-git clone <your_repository_url>
+git clone <the_repository_url>
 cd LEL
 ````
 
